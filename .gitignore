@@ -1,0 +1,26 @@
+.#*
+*~
+\#*
+*.sw[p|o]
+.DS_Store
+__MACOSX
+node_modules
+npm-debug.log
+dist
+docs
+.sass-cache
+.grunt
+app/*.html
+
+app/public/*
+_SpecRunner.html
+test/junit/*
+Gemfile.lock
+# developer misc
+.screenrc
+.idea
+.DS_Store
+.tern*
+app/rexel.appcache
+
+Session.vim
