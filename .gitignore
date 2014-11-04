@@ -7,7 +7,6 @@ __MACOSX
 node_modules
 npm-debug.log
 dist
-docs
 .sass-cache
 .grunt
 app/*.html
