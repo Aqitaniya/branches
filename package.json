@@ -8,6 +8,7 @@
     "url": "https://github.com/willowtreeapps/branches"
   },
   "version": "0.0.1",
+  "main": "main.js",
   "dependencies": {
     "lodash": "~2.4.1",
     "ramda": "^0.5.0",
