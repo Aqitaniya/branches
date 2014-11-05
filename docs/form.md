@@ -57,7 +57,7 @@ function emailValidation(val) {
 
 function onSubmit(e, data) {
     e.preventDefault();
-
+    // Do something with form data
 }
 ```
 
