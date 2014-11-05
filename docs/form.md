@@ -12,9 +12,9 @@ all w3 attributes in the props array.
 
 ### `validateWith`
 `validateWith` is a function that is passed into the props array that
-validates that fields value. Form.Validate has some validations, 
+validates its value. `Form.Validate` has some validations, 
 but any function can be passed into the `validateWith` prop that accepts 
-a value from a field and returns either true or false. (true being the 
+a value as one of its properties and returns either true or false. (true being the 
 field is valid) 
 
 ##Example
