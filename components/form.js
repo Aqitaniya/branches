@@ -1,6 +1,6 @@
 'use strict';
 
-var React = require('react');
+var React = require('react/addons');
 var utils = require('./form/utils');
 
 /**
@@ -35,26 +35,31 @@ var Form = React.createClass({
     },
     
     getInitialState: function() {
-        this.registerChildFields();
-        this.setFormAttributes();
         return {
             fields: {},
             valid: false,
             data: {}
         }; 
     },
+
+    componentWillMount: function() {
+        this.registerChildFields();
+        this.setFormAttributes();
+    },
     
     /**
-     * Adds callback properties to children 
-     * classes to manage validation state and
-     * field values.
+     * Adds callback properties to a cloned 
+     * version of the child using `cloneWithProps`.
      *
      * @method registerChildFields
      */
     registerChildFields: function() {
+        this._children = [];
         React.Children.forEach(this.props.children, function(child) {
-            child.props.updateValidationState = this.updateValidationState;
-            child.props.updateFieldValue = this.updateFieldValue;
+            this._children.push(React.addons.cloneWithProps(child, {
+                _updateFieldValue : this._updateFieldValue,
+                _updateValidationState : this._updateValidationState
+            }));
         }.bind(this));
     },
     
@@ -80,7 +85,7 @@ var Form = React.createClass({
      *
      * @method updateValidationState
      */
-    updateValidationState: function(valid, name) {
+    _updateValidationState: function(valid, name) {
         var fields = this.state.fields;
         fields[name] = valid;
         this.setState({fields: fields});
@@ -93,7 +98,7 @@ var Form = React.createClass({
      *
      * @method updateFieldValue
      */
-    updateFieldValue: function(name, value) {
+    _updateFieldValue: function(name, value) {
         var data = this.state.data;
         data[name] = value;
         this.setState({data: data});
@@ -117,7 +122,7 @@ var Form = React.createClass({
         } 
         this.setState({valid: valid});
     },
-    
+
     /**
      * Passes onSubmit function of form
      * to props `onSubmit` with the event 
@@ -135,7 +140,7 @@ var Form = React.createClass({
 
         return ( 
             <form {...this._formAttributes} onSubmit={this.onSubmit}>
-                {this.props.children}
+                {this._children}
                 <input 
                     type="submit" 
                     value={submitValue}

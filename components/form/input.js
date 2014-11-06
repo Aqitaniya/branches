@@ -57,12 +57,11 @@ var Input = React.createClass({
     },
 
     getInitialState: function() {
-        this.setInputAttributes();
         return {
             valid: this.isValid()
         };    
     },
-    
+
     /**
      * Adds callbacks to `Input` for updating field value
      * and validation state on `Form` and calls `updateValidationState`.
@@ -70,9 +69,10 @@ var Input = React.createClass({
      * @method componentDidMount
      */ 
     componentDidMount: function() {
-        this._updateValidationState = this.props.updateValidationState;
+        this.setInputAttributes();
+        this._updateValidationState = this.props._updateValidationState;
         this._updateValidationState(this.state.valid, this.props.name);
-        this._updateFieldValue = this.props.updateFieldValue;
+        this._updateFieldValue = this.props._updateFieldValue;
     },
     
     /**
