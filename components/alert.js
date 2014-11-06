@@ -59,6 +59,10 @@ var Mixin = {
 // ALERT COMPONENT
 // =============================================================================
 var Alert = React.createClass({
+    statics: {
+        mixin: Mixin
+    },
+
     // Define our API
     propTypes: {
         // Transfered props
@@ -136,8 +140,5 @@ var Alert = React.createClass({
 // =============================================================================
 // EXPORTS
 // =============================================================================
-module.exports = {
-    mixin: Mixin,
-    component: Alert
-};
+module.exports = Alert;
 
