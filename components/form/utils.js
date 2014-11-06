@@ -6,6 +6,17 @@ var encryptTypes = [
     'text/plain'
 ];
 
+var formValidProps = [
+    'accept-charset',
+    'action',
+    'autocomplete',
+    'encrypt',
+    'method',
+    'name',
+    'novalidate',
+    'target'
+];
+
 var inputTypes = [
     'button',
     'checkbox',
@@ -65,7 +76,8 @@ var inputValidProps = [
 ];
 
 module.exports = {
-    inputTypes: inputTypes,
+    formValidProps: formValidProps,
     inputValidProps: inputValidProps,
+    inputTypes: inputTypes,
     encryptTypes: encryptTypes
 };
