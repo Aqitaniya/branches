@@ -55,10 +55,11 @@ var Form = React.createClass({
      */
     registerChildFields: function() {
         this._children = [];
-        React.Children.forEach(this.props.children, function(child) {
+        React.Children.forEach(this.props.children, function(child, index) {
             this._children.push(React.addons.cloneWithProps(child, {
                 _updateFieldValue : this._updateFieldValue,
-                _updateValidationState : this._updateValidationState
+                _updateValidationState : this._updateValidationState,
+                key: index 
             }));
         }.bind(this));
     },
