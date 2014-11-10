@@ -10,7 +10,6 @@
   "version": "0.0.1",
   "main": "./components/main.js",
   "dependencies": {
-    "lodash": "~2.4.1",
     "ramda": "^0.5.0",
     "react": "^0.12.0"
   },

@@ -69,7 +69,7 @@ var Alert = React.createClass({
         className: React.PropTypes.string,
         // Custom
         title: React.PropTypes.string,
-        text: React.PropTypes.string,
+        message: React.PropTypes.string,
         buttons: React.PropTypes.object,
         // Callbacks
         onClose: React.PropTypes.func,
@@ -124,7 +124,7 @@ var Alert = React.createClass({
                 <div className="alert">
                     <div className="alert-body">
                         {maybe(this.props.title, <h1>{this.props.title}</h1>)}
-                        {maybe(this.props.text, <p>{this.props.text}</p>)}
+                        {maybe(this.props.message, <p>{this.props.message}</p>)}
                     </div>
 
                     <div className="button-container">
