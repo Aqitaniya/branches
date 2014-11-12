@@ -1,13 +1,12 @@
 module.exports = {
     componentWillMount: function() {
-        document.getElementByTagName('body')[0].className += " noscroll";
-        console.log(document.getElementByTagName('body')[0].className);
+        document.getElementsByTagName('body')[0].className += " noscroll";
     },
 
     componentWillUnmount: function() {
-        var classes = document.getElementByTagName('body')[0].className;
+        var classes = document.getElementsByTagName('body')[0].className;
         var cleaned = classes.replace(/(?:^|\s)noscroll(?!\S)/g , '');
 
-        document.getElementByTagName('body')[0].className = cleaned;
+        document.getElementsByTagName('body')[0].className = cleaned;
     }
 };

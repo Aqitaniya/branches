@@ -2,6 +2,7 @@
 // LIBRARIES
 // =============================================================================
 var React = require('react');
+var NoScroll = require('./noscroll');
 
 
 // =============================================================================
@@ -46,11 +47,16 @@ var Mixin = {
     },
 
     alertCreate: function(options) {
-        var onClose = this._alertOnClose.bind(this, options.onClose);
+        this.setState({ _alert: options });
+    },
 
-        this.setState({
-            _alert: <Alert {...options} onClose={onClose} />
-        });
+    renderAlert: function() {
+        var options = this.state._alert;
+
+        if (options) {
+            var onClose = this._alertOnClose.bind(this, options.onClose);
+            return  <Alert {...options} onClose={onClose} />
+        }
     }
 };
 
@@ -59,6 +65,8 @@ var Mixin = {
 // ALERT COMPONENT
 // =============================================================================
 var Alert = React.createClass({
+    mixins: [NoScroll],
+
     statics: {
         mixin: Mixin
     },
