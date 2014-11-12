@@ -61,4 +61,25 @@ function onSubmit(e, data) {
 }
 ```
 
+Nesting Inputs also works
 
+```js
+<F.Form onSubmit={this.submit}>
+    <fieldset>
+        <label>Name</label>
+        <F.Input type="text" name="name" required="required" />
+    </fieldset>
+
+    <fieldset>
+        <label>Email</label>
+        <F.Input type="email" name="email" validateWith={F.Validate.email} />
+    </fieldset>
+    
+    <fieldset>
+        <label>Password</label>
+        <F.Input type="password" name="password" required="required" />
+    </fieldset>
+
+    <F.Submit type="submit" />
+</F.Form>
+```

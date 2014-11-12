@@ -43,6 +43,7 @@ var Form = React.createClass({
     },
 
     componentWillMount: function() {
+        this._children = [];
         this.registerChildFields();
         this.setFormAttributes();
     },
@@ -54,14 +55,79 @@ var Form = React.createClass({
      * @method registerChildFields
      */
     registerChildFields: function() {
-        this._children = [];
         React.Children.forEach(this.props.children, function(child, index) {
-            this._children.push(React.addons.cloneWithProps(child, {
-                _updateFieldValue : this._updateFieldValue,
-                _updateValidationState : this._updateValidationState,
-                key: index 
-            }));
+            if (this.validFormChild(child)) {
+                this._children.push(this.attachCallbacks(child, index));
+            } else if (typeof child.props.children === 'object') {
+                this._children.push(this.cloneWithKey(this.registerNestedChildren(child), index));    
+            } else {
+                this._children.push(child);
+            }
         }.bind(this));
+    },
+    
+    /** 
+     * Recursive method that clones each 
+     * child attaching callbacks on `Form`
+     * specific inputs
+     *
+     * @method registerNestedChildren
+     */
+    registerNestedChildren: function(element) {
+        var children = [];
+
+        React.Children.forEach(element.props.children, function(child, index) {
+            if (this.validFormChild(child)) {
+                children.push(this.attachCallbacks(child, index));
+            } else if (typeof child.props.children === 'object') {
+                children.push(this.cloneWithKey(this.registerNestedChildren(child), index));
+            } else {
+                children.push(child);
+            }
+        }.bind(this));
+
+        return React.addons.cloneWithProps(element, {
+            children: children
+        });
+    },
+
+    /**
+     * Helper method to check if an
+     * input is a valid `Form` input
+     *
+     * @method validFormChild
+     * @return boolean
+     */
+    validFormChild: function(child) {
+        return child.type && child.type.displayName === 'Input'; 
+    },
+    
+    /**
+     * Helper method that returns a
+     * cloned version of a child with
+     * it's key attached
+     *
+     * @method cloneWithKey
+     */
+    cloneWithKey: function(klass, index) {
+        return React.addons.cloneWithProps(klass, {
+            key: index
+        });
+    },
+    
+    /**
+     * Helper method that attaches 
+     * callbacks and a key to a `Form`
+     * input
+     *
+     * @method attachCallbacks
+     */
+    attachCallbacks: function(child, index) {
+        return React.addons.cloneWithProps(child, {
+            _updateFieldValue : this._updateFieldValue,
+            _updateValidationState : this._updateValidationState,
+            key: index
+        });
     },
     
     /**
@@ -136,17 +202,9 @@ var Form = React.createClass({
     },
 
     render: function() {
-        var submitValue = this.props.submitValue || 'Submit',
-            disabled = this.state.valid ? '' : 'disabled';
-
         return ( 
             <form {...this._formAttributes} onSubmit={this.onSubmit}>
                 {this._children}
-                <input 
-                    type="submit" 
-                    value={submitValue}
-                    disabled={disabled}
-                ></input>
             </form>
         );
     }
@@ -155,5 +213,6 @@ var Form = React.createClass({
 module.exports = {
     Form: Form,
     Input: require('./form/input'),
+    Submit: require('./form/submit'),
     Validate: require('./form/validations')
 };
