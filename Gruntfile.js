@@ -18,18 +18,10 @@ module.exports = function (grunt) {
         ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
         // Task configuration.
         watch: {
-            less: {
-                files: [ 'app/src/styles/**/*.less' ],
-                tasks: [ 'less' ]
-            },
             js: {
-                files: [ 'app/src/scripts/**/*.js' ],
+                files: [ 'components/**/*.js' ],
                 tasks: [ 'browserify' ]
             }
-        },
-
-        clean: {
-            deploy: [ 'release/src' ]
         },
 
         browserify: {
@@ -39,52 +31,7 @@ module.exports = function (grunt) {
                 extensions: ['.jsx']
             },
             dist: {
-                files: { 'app/public/scripts/scripts.js': 'app/src/scripts/main.js'}
-            }
-        },
-
-        less: {
-            development: {
-                options: {
-                    paths: 'app/src/styles',
-                    cleancss: true
-                },
-                files: {
-                    'app/public/styles/styles.css': 'app/src/styles/styles.less'
-                }
-            }
-        },
-
-        copy: {
-            build: {
-                files: [
-                    {
-                        expand: true,
-                        cwd: 'app/src/images',
-                        src: ['**'],
-                        dest: 'app/public/images/'
-                    },
-                    {
-                        src: 'app/public/packages/modernizr/modernizr.js',
-                        dest: 'app/public/scripts/modernizr.js'
-                    },
-                    {
-                        expand: true,
-                        cwd: 'app/src/fonts',
-                        src: ['**'],
-                        dest: 'app/public/fonts'
-                    }
-                ]
-            },
-            deploy: {
-                files: [
-                    {
-                        expand: true,
-                        cwd: 'app',
-                        src: ['**'],
-                        dest: 'release'
-                    }
-                ]
+                files: { 'dist/scripts.js': 'components/main.js'}
             }
         },
 
@@ -98,10 +45,7 @@ module.exports = function (grunt) {
         concurrent: {
             prod: {
                 tasks: [
-                    'copy:build',
                     'browserify',
-                    'less',
-                    'proxy:prod',
                     'watch'
                 ],
                 options: {
@@ -110,10 +54,7 @@ module.exports = function (grunt) {
             },
             dev: {
                 tasks: [
-                    'copy:build',
                     'browserify',
-                    'less',
-                    'proxy:dev',
                     'watch'
                 ],
                 options: {
@@ -125,29 +66,16 @@ module.exports = function (grunt) {
 
     // Load npm tasks.
     grunt.util._.each([
-        'contrib-clean',
-        'contrib-copy',
         'contrib-watch',
         'concurrent',
-        'contrib-less',
         'gh-pages',
         'browserify'
     ], function (tasks) {
         grunt.loadNpmTasks('grunt-' + tasks);
     });
 
-    grunt.registerTask('proxy', function () {
-        var done = this.async();
-        var app = require('./utils/proxy')({
-            server: this.args[0],
-            port: port
-        });
-        app.on('close', done);
-    });
-
     grunt.registerTask('default', ['concurrent:dev']);
 
-    grunt.registerTask('deploy', ['copy:build', 'browserify', 'less', 'copy:deploy', 'clean:deploy']);
     grunt.registerTask('ghpages', [ 'gh-pages' ]);
 
 };

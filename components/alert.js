@@ -55,7 +55,8 @@ var Mixin = {
 
         if (options) {
             var onClose = this._alertOnClose.bind(this, options.onClose);
-            return  <Alert {...options} onClose={onClose} />
+
+            return (<Alert {...options} onClose={onClose} />);
         }
     }
 };
