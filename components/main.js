@@ -3,5 +3,6 @@
 module.exports = {
     alert: require('./alert'),
     lightbox: require('./lightbox/lightbox'),
-    notifcation: require('./notification')
+    notifcation: require('./notification'),
+    noscroll: require('./noscroll')
 };

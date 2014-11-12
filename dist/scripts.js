@@ -273,10 +273,11 @@ module.exports = Lightbox;
 module.exports = {
     alert: require('./alert'),
     lightbox: require('./lightbox/lightbox'),
-    notifcation: require('./notification')
+    notifcation: require('./notification'),
+    noscroll: require('./noscroll')
 };
 
-},{"./alert":1,"./lightbox/lightbox":2,"./notification":5}],4:[function(require,module,exports){
+},{"./alert":1,"./lightbox/lightbox":2,"./noscroll":4,"./notification":5}],4:[function(require,module,exports){
 module.exports = {
     componentWillMount: function() {
         document.getElementsByTagName('body')[0].className += " noscroll";
