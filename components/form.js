@@ -43,27 +43,8 @@ var Form = React.createClass({
     },
 
     componentWillMount: function() {
-        this._children = [];
-        this.registerChildFields();
+        this._children = this.registerChildren(this);
         this.setFormAttributes();
-    },
-    
-    /**
-     * Adds callback properties to a cloned 
-     * version of the child using `cloneWithProps`.
-     *
-     * @method registerChildFields
-     */
-    registerChildFields: function() {
-        React.Children.forEach(this.props.children, function(child, index) {
-            if (this.validFormChild(child)) {
-                this._children.push(this.attachCallbacks(child, index));
-            } else if (typeof child.props.children === 'object') {
-                this._children.push(this.cloneWithKey(this.registerNestedChildren(child), index));    
-            } else {
-                this._children.push(child);
-            }
-        }.bind(this));
     },
     
     /** 
@@ -73,22 +54,24 @@ var Form = React.createClass({
      *
      * @method registerNestedChildren
      */
-    registerNestedChildren: function(element) {
-        var children = [];
-
-        React.Children.forEach(element.props.children, function(child, index) {
+    registerChildren: function(element) {
+        var children = React.Children.map(element.props.children, function(child, index) {
             if (this.validFormChild(child)) {
-                children.push(this.attachCallbacks(child, index));
-            } else if (typeof child.props.children === 'object') {
-                children.push(this.cloneWithKey(this.registerNestedChildren(child), index));
+                return this.attachCallbacks(child, index);
+            } else if (this.hasChildren(child)) {
+                return this.registerChildren(child);
             } else {
-                children.push(child);
+                return child;
             }
         }.bind(this));
-
-        return React.addons.cloneWithProps(element, {
+     
+        return element === this ? children : React.addons.cloneWithProps(element, {
             children: children
         });
+    },
+
+    hasChildren: function(child) {
+        return typeof child.props.children === 'object';
     },
 
     /**
