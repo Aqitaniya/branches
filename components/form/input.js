@@ -171,6 +171,7 @@ var Input = React.createClass({
                 {...this._inputAttributes}
                 id={this.props.id} 
                 className={classList}
+                key={this.props.key}
                 onChange={this.onChange}
             ></input>      
         );
