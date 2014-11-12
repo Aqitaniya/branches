@@ -303,20 +303,6 @@ var Notification = React.createClass({displayName: 'Notification',
     // -------------------------------------------------------------------------
     // Initial State
     // -------------------------------------------------------------------------
-    /**
-     * We keep a reference to the timeout so that it can be cleared in cases
-     * where the notification is not solely dismissable from a timeout, e.g.
-     * user clicks the notification, dismissing it, before the timeout can
-     * dismiss it.
-     *
-     * @return {Object} initialState explictly allocating _timeout
-     */
-    getInitialState: function() {
-        return {
-            _timeout: undefined
-        };
-    },
-
     // How do I doc this up
     propTypes: {
         // ~ Required .........................................................
@@ -351,26 +337,9 @@ var Notification = React.createClass({displayName: 'Notification',
      * @method componentDidMount
      */
     componentDidMount: function () {
-        var timeout;
-
         if (this.props.timeout) {
-            timeout = setTimeout(this.dismiss, this.props.timeout);
-            this.setState({_timeout: timeout});
+            this.timeout = setTimeout(this.dismiss, this.props.timeout);
         }
-    },
-
-    /**
-     * Changes to state will not trigger a rerender. The reference to the
-     * timeout function in inconsequential to its layout. So don't do anything
-     * with it.
-     *
-     * @param newProps the new properties of the compontent
-     * @param newState the new state of the component
-     * @return true iff props are different.
-     */
-    shouldComponentUpdate: function (newProps, newState) {
-        // State changes will not rerender the view
-        return this.props.id !== newProps.id;
     },
 
     // -----------------------------------------------------------------------
@@ -419,8 +388,10 @@ var Notification = React.createClass({displayName: 'Notification',
             event.nativeEvent.stopImmediatePropagation();
         }
 
-        clearTimeout(this.state._timeout);
-        this.setState({_timeout: undefined});
+        if (this.timeout) {
+            clearTimeout(this.timeout);
+            this.timeout = undefined;
+        }
 
         this.props.onDismissed();
     }),
