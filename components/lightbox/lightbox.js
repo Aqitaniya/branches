@@ -86,7 +86,7 @@ var Lightbox = React.createClass({
 
         var containers = 'lightbox-container ';
         if (this.props.className.length) {
-            containers += ' 'this.props.className+'-container';
+            containers += this.props.className+'-container';
         }
 
 
