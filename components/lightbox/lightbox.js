@@ -82,9 +82,17 @@ var Lightbox = React.createClass({
     render: function() {
         var View = this.props.view;
 
+        var classes = 'lightbox ' + this.props.className;
+
+        var containers = 'lightbox-container ';
+        if (this.props.className.length) {
+            containers += ' '
+        }
+
+
         return (
-            <div className="lightbox-container">
-                <div className="lightbox">
+            <div className={containers}>
+                <div className={classes}>
                     <div className="lightbox-body">
                         <View ref="view" onClose={this.props.onClose} />
                     </div>
