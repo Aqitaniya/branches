@@ -1,7 +1,70 @@
 'use strict';
 
 var React = require('react');
-var utils = require('./utils');
+
+var encryptTypes = [
+    'application/x-www-form-urlencoded',
+    'multipart/form-data',
+    'text/plain'
+];
+
+var inputTypes = [
+    'button',
+    'checkbox',
+    'color',
+    'date', 
+    'datetime', 
+    'datetime-local', 
+    'email', 
+    'file',
+    'hidden',
+    'image',
+    'month', 
+    'number', 
+    'password',
+    'radio',
+    'range',
+    'reset',
+    'search',
+    'submit',
+    'tel',
+    'text',
+    'time',
+    'url',
+    'week'
+];
+
+var inputValidProps = [
+    'accept',
+    'alt',
+    'autocomplete',
+    'autofocus',
+    'checked',
+    'disabled',
+    'form',
+    'formaction',
+    'formenctype',
+    'formmethod',
+    'formnovalidate',
+    'formtarget',
+    'height',
+    'list',
+    'max',
+    'maxlength',
+    'min',
+    'multiple',
+    'name',
+    'pattern',
+    'placeholder',
+    'readonly',
+    'required',
+    'size',
+    'src',
+    'step',
+    'type',
+    'value',
+    'width'
+];
 
 /**
  * Creates a self validating form input that 
@@ -29,7 +92,7 @@ var Input = React.createClass({
         'disabled':         React.PropTypes.oneOf(['disabled']),
         'form':             React.PropTypes.string,
         'formaction':       React.PropTypes.string,
-        'formenctype':      React.PropTypes.oneOf(utils.encryptTypes),
+        'formenctype':      React.PropTypes.oneOf(encryptTypes),
         'formmethod':       React.PropTypes.string,
         'formnovalidate':   React.PropTypes.oneOf(['formnovalidate']),
         'formtarget':       React.PropTypes.string,
@@ -47,7 +110,7 @@ var Input = React.createClass({
         'size':             React.PropTypes.string,
         'src':              React.PropTypes.string,
         'step':             React.PropTypes.string,
-        'type':             React.PropTypes.oneOf(utils.inputTypes),
+        'type':             React.PropTypes.oneOf(inputTypes),
         'value':            React.PropTypes.string,
         'width':            React.PropTypes.string,
 
@@ -137,7 +200,7 @@ var Input = React.createClass({
         this._inputAttributes = {};
        
         for(var prop in this.props) {
-            if (utils.inputValidProps.indexOf(prop) !== -1) {
+            if (inputValidProps.indexOf(prop) !== -1) {
                 this._inputAttributes[prop] = this.props[prop];
             }          
         } 
