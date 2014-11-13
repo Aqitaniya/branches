@@ -1,0 +1,23 @@
+{
+  "name": "<%= pkg.name %>",
+  "version": "<%= pkg.version %>",
+  "description": "<%= pkg.description %>",
+  "main": "main.js",
+  "keywords": [
+    "react",
+    "react-component"
+  ],
+  "author": "WillowTree Apps WAT <wat@willowtreeapps.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/willowtreeapps/branches"
+  },
+  "bugs": {
+    "url": "https://github.com/willowtreeapps/branches/issues"
+  },
+  "peerDependencies": {
+    "react": ">=0.9",
+    "ramda": ">=0.5.0"
+  }
+}
