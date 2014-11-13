@@ -1,6 +1,6 @@
 [Back](https://github.com/willowtreeapps/branches/tree/master/docs)
 
-#Form
+#Simple Form
 
 ## Form
 Form is a top level component that manages the state of the form 
@@ -80,6 +80,6 @@ Nesting Inputs also works
         <F.Input type="password" name="password" required="required" />
     </fieldset>
 
-    <F.Submit type="submit" />
+    <input type="submit" />
 </F.Form>
 ```
