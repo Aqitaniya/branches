@@ -1,7 +1,23 @@
 'use strict';
 
 var React = require('react/addons');
-var utils = require('./form/utils');
+
+var encryptTypes = [
+    'application/x-www-form-urlencoded',
+    'multipart/form-data',
+    'text/plain'
+];
+
+var formValidProps = [
+    'accept-charset',
+    'action',
+    'autocomplete',
+    'encrypt',
+    'method',
+    'name',
+    'novalidate',
+    'target'
+];
 
 /**
  * Creates a self validating form that 
@@ -19,7 +35,7 @@ var Form = React.createClass({
         'accept-charset': React.PropTypes.string,
         'action':         React.PropTypes.string,
         'autocomplete':   React.PropTypes.oneOf(['on', 'off']),
-        'encrypt':        React.PropTypes.oneOf(utils.encryptTypes),
+        'encrypt':        React.PropTypes.oneOf(encryptTypes),
         'method':         React.PropTypes.string,
         'name':           React.PropTypes.string,
         'novalidate':     React.PropTypes.oneOf(['novalidate']),
@@ -123,7 +139,7 @@ var Form = React.createClass({
         this._formAttributes = {};
 
         for(var prop in this.props) {
-            if (utils.formValidProps.indexOf(prop) !== -1) {
+            if (formValidProps.indexOf(prop) !== -1) {
                 this._formAttributes[prop] = this.props[prop];
             }     
         } 
@@ -195,7 +211,6 @@ var Form = React.createClass({
 
 module.exports = {
     Form: Form,
-    Input: require('./form/input'),
-    Submit: require('./form/submit'),
-    Validate: require('./form/validations')
+    Input: require('./input'),
+    Validate: require('./validations')
 };

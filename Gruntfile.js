@@ -1,9 +1,3 @@
-/* global module: false, require: false, __dirname: false, process: false */
-
-// Database connect
-var argv = require('optimist').argv;
-var port = argv.port || 9999;
-
 module.exports = function (grunt) {
 
     // Project configuration.
@@ -17,10 +11,49 @@ module.exports = function (grunt) {
         '<%= pkg.author.name %>;' +
         ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
         // Task configuration.
+        
+        clean: {
+            transformed: ['transformed'],
+            cjs: ['cjs']
+        },
+
+        copy: {
+            cjs: {
+                files: [
+                  {
+                    expand: true,
+                    cwd: 'transformed/',
+                    src: ['**/*.js'],
+                    dest: 'dist/'
+                  },
+                  {
+                    src: ['**/*'],
+                    dest: 'dist/',
+                    cwd: 'tools/commonjs',
+                    expand: true
+                  }
+                ]
+            }            
+        },
+
+        less: {
+            build: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'components/styles',
+                        src: ['**/*.less'],
+                        dest: 'dist/styles/',
+                        ext: '.css'
+                    }
+                ]
+            }
+        },
+
         watch: {
             js: {
                 files: [ 'components/**/*.js' ],
-                tasks: [ 'browserify' ]
+                tasks: [  ]
             }
         },
 
@@ -42,40 +75,44 @@ module.exports = function (grunt) {
             src: ['**']
         },
 
-        concurrent: {
-            prod: {
-                tasks: [
-                    'browserify',
-                    'watch'
-                ],
-                options: {
-                    logConcurrentOutput: true
-                }
-            },
-            dev: {
-                tasks: [
-                    'browserify',
-                    'watch'
-                ],
-                options: {
-                    logConcurrentOutput: true
-                }
+        react: {
+            src: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'components',
+                        src: [
+                            '**/*.js',
+                            '**/*.jsx'
+                        ],
+                        dest: 'transformed',
+                        ext: '.js'
+                    }
+                ]
             }
         }
     });
 
     // Load npm tasks.
     grunt.util._.each([
+        'browserify',
+        'contrib-clean',
         'contrib-watch',
-        'concurrent',
+        'contrib-copy',
+        'contrib-less',
         'gh-pages',
-        'browserify'
+        'react'
     ], function (tasks) {
         grunt.loadNpmTasks('grunt-' + tasks);
     });
 
-    grunt.registerTask('default', ['concurrent:dev']);
-
     grunt.registerTask('ghpages', [ 'gh-pages' ]);
 
+    grunt.registerTask('build', [
+        'clean:cjs',
+        'react:src',
+        'copy:cjs',
+        'less',
+        'clean:transformed'
+    ]);
 };
