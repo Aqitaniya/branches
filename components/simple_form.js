@@ -98,7 +98,13 @@ var Form = React.createClass({
      * @return boolean
      */
     validFormChild: function(child) {
-        return child.type && child.type.displayName === 'Input'; 
+        var components = [
+            'Input',
+            'Textarea',
+            'Select'
+        ];
+
+        return child.type && components.indexOf(child.type.displayName) !== -1; 
     },
     
     /**
@@ -217,5 +223,7 @@ var Form = React.createClass({
 module.exports = {
     Form: Form,
     Input: require('./sub_modules/simple_input'),
+    Select: require('./sub_modules/simple_select'),
+    Textarea: require('./sub_modules/simple_textarea'),
     Validate: require('./sub_modules/simple_validation')
 };
