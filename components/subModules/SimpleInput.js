@@ -72,7 +72,7 @@ var inputValidProps = [
  *
  * @class Input 
  */
-var Input = React.createClass({displayName: 'Input',
+var Input = React.createClass({
     /**
      * Includes a list of w3 input attributes and 
      * an optional `validateWith` function. NOTE: 
@@ -230,14 +230,14 @@ var Input = React.createClass({displayName: 'Input',
         var value = this.props.formData[this.props.name];
 
         return (
-            React.createElement("input", React.__spread({},  
-                this._inputAttributes, 
-                {value: value, 
-                id: this.props.id, 
-                className: classList, 
-                key: this.props.key, 
-                onChange: this.onChange
-            }))      
+            <input 
+                {...this._inputAttributes}
+                value={value}
+                id={this.props.id} 
+                className={classList}
+                key={this.props.key}
+                onChange={this.onChange}
+            ></input>      
         );
     }
 });

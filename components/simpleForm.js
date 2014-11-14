@@ -102,19 +102,6 @@ var Form = React.createClass({
     },
     
     /**
-     * Helper method that returns a
-     * cloned version of a child with
-     * it's key attached
-     *
-     * @method cloneWithKey
-     */
-    cloneWithKey: function(klass, index) {
-        return React.addons.cloneWithProps(klass, {
-            key: index
-        });
-    },
-    
-    /**
      * Helper method that attaches 
      * callbacks and a key to a `Form`
      * input
@@ -122,11 +109,29 @@ var Form = React.createClass({
      * @method attachCallbacks
      */
     attachCallbacks: function(child, index) {
+        this.setInitialValue(child);
+        
         return React.addons.cloneWithProps(child, {
             _updateFieldValue : this._updateFieldValue,
             _updateValidationState : this._updateValidationState,
-            key: index
+            key: index,
+            value: null,
+            formData: this.state.data
         });
+    },
+    
+    /**
+     * Handels the case where an initial value
+     * is passed into an input field's props.
+     *
+     * @method setInitialValue
+     */
+    setInitialValue: function(child) {
+        if (child.props.value) {
+            var state = this.state;
+            state.data[child.props.name] = child.props.value;
+            this.setState(state);
+        }
     },
     
     /**
@@ -211,6 +216,6 @@ var Form = React.createClass({
 
 module.exports = {
     Form: Form,
-    Input: require('./input'),
-    Validate: require('./validations')
+    Input: require('./subModules/SimpleInput'),
+    Validate: require('./subModules/SimpleValidations')
 };
