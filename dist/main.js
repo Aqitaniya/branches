@@ -1,10 +1,10 @@
 module.exports = {
     // Modules
-    Alert: require('./Alert'),
-    Lightbox: require('./Lightbox'),
-    Notifcation: require('./Notification'),
-    SimpleForm: require('./SimpleForm'),
+    Alert: require('./alert'),
+    Lightbox: require('./lightbox'),
+    Notifcation: require('./notification'),
+    SimpleForm: require('./simple_form'),
 
     // Mixins
-    noscroll: require('./mixins/noscroll')
+    NoScroll: require('./mixins/noscroll')
 };

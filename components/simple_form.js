@@ -216,6 +216,6 @@ var Form = React.createClass({
 
 module.exports = {
     Form: Form,
-    Input: require('./subModules/SimpleInput'),
-    Validate: require('./subModules/SimpleValidations')
+    Input: require('./sub_modules/simple_input'),
+    Validate: require('./sub_modules/simple_validation')
 };
