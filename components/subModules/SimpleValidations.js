@@ -3,8 +3,14 @@
 // Basic RegExp for checking emails
 var EMAIL = new RegExp(/\S+@\S+\.\S+/);
 
-// 6 - 30 Characters long, 1 Uppercase, 1 Lowercase, 1 Number
-var PASSWORD1 = new RegExp(/^(?=.*?[0-9])(?=.*?[A-Z])(?=.*?[a-z]).{6,30}$/); 
+// http://code.tutsplus.com/tutorials/8-regular-expressions-you-should-know--net-6149
+var PASSWORD = new RegExp(/^[a-z0-9_-]{6,18}$/); 
+var USERNAME = new RegExp(/^[a-z0-9_-]{3,16}$/);
+var HEX_VALUE = new RegExp(/^#?([a-f0-9]{6}|[a-f0-9]{3})$/);
+var SLUG = new RegExp(/^[a-z0-9-]+$/);
+var URL = new RegExp(/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/);
+var IP_ADDRESS = new RegExp(/^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/);
+var HTML_TAG = new RegExp(/^<([a-z]+)([^<]+)*(?:>(.*)<\/\1>|\s+\/>)$/);
 
 var validate = function(regexp) {
     return function(val) {
@@ -14,5 +20,11 @@ var validate = function(regexp) {
 
 module.exports = {
     email: validate(EMAIL),
-    password: validate(PASSWORD1)
+    password: validate(PASSWORD),
+    username: validate(USERNAME),
+    hexValue: validate(HEX_VALUE),
+    slug: validate(SLUG),
+    url: validate(URL),
+    ipAddress: validate(IP_ADDRESS),
+    htmlTag: validate(HTML_TAG)
 };

@@ -159,8 +159,14 @@ var Input = React.createClass({displayName: 'Input',
      * @method onChange
      */
     onChange: function(e) {
-        this._updateFieldValue(this.props.name, e.target.value);
-        this.revalidateInput(e.target.value);
+        var value = e.target.value;
+
+        if (e.target.type === 'checkbox') {
+            value = e.target.checked;
+        };
+        
+        this._updateFieldValue(this.props.name, value);
+        this.revalidateInput(value);
     },
     
     /**
