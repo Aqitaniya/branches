@@ -118,6 +118,7 @@ var Input = React.createClass({
 
         // Component Properties
         'validateWith':     React.PropTypes.func,
+        'onChange':         React.PropTypes.func,
         'className':        React.PropTypes.string
     },
     
@@ -140,13 +141,21 @@ var Input = React.createClass({
      */
     onChange: function(e) {
         var value = e.target.value;
-
+        
         if (e.target.type === 'checkbox') {
             value = e.target.checked;
         };
+
+        // if (e.target.type === 'file') {
+        //     value = e.target.files;
+        // }
         
         this._updateFieldValue(this.props.name, value);
         this.revalidateSelf(value);
+        
+        if (this.props.onChange) {
+            this.props.onChange(e);
+        }
     },
     
     render: function() {

@@ -87,7 +87,7 @@ var Form = React.createClass({displayName: 'Form',
     },
 
     hasChildren: function(child) {
-        return typeof child.props.children === 'object';
+        return child && typeof child.props.children === 'object';
     },
 
     /**
@@ -104,7 +104,7 @@ var Form = React.createClass({displayName: 'Form',
             'Select'
         ];
 
-        return child.type && components.indexOf(child.type.displayName) !== -1; 
+        return child && child.type && components.indexOf(child.type.displayName) !== -1; 
     },
     
     /**
