@@ -10,6 +10,20 @@ var Notification = React.createClass({displayName: 'Notification',
     // -------------------------------------------------------------------------
     // Initial State
     // -------------------------------------------------------------------------
+    /**
+     * We track whether or not a notification has been dismissed or acknowleged.
+     * Mainly so that we can only dismiss a notification once. Acknowledge
+     * tracking is just for symettry.
+     *
+     * @return acknwoledged and dismissed as false.
+     */
+    getIntialState: function () {
+        return {
+            acknowledge: false,
+            dismissed: false
+        }
+    },
+
     // How do I doc this up
     propTypes: {
         // ~ Required .........................................................
@@ -78,6 +92,8 @@ var Notification = React.createClass({displayName: 'Notification',
      * Why don't I name this onClick... eh. I like verbs.
      */
     acknowledge: function () {
+        this.setState({acknowledged: true});
+
         this.props.onAcknowledged();
     },
 
@@ -89,19 +105,22 @@ var Notification = React.createClass({displayName: 'Notification',
      * only be dismissed once, make it so. Use _.once keeps whether
      * or not the Notification is dismissed off of state. Which is nice!
      */
-    dismiss: _.once(function (event) {
+    dismiss: function (event) {
         if (event) {
             event.stopPropagation();
             event.nativeEvent.stopImmediatePropagation();
         }
+
+        if (this.state.dismissed) { return; }
 
         if (this.timeout) {
             clearTimeout(this.timeout);
             this.timeout = undefined;
         }
 
+        this.setState({dismissed: true});
         this.props.onDismissed();
-    }),
+    },
 
     // ------------------------------------------------------------------------
     // Rendering
