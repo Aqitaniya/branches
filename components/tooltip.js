@@ -1,12 +1,3 @@
-"use strict";
-
-/**
- * For children we want to maintain their onMouseEnter handler's if they are
- * set. Using this function will ensure that both handlers get called.
- *
- * TODO: See if this will leak memory. But I don't think it should
- */
-
 // =============================================================================
 // TOOLTIP MIXIN
 // ============================================================================
