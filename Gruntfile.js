@@ -11,7 +11,7 @@ module.exports = function (grunt) {
         '<%= pkg.author.name %>;' +
         ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
         // Task configuration.
-        
+
         clean: {
             transformed: ['transformed'],
             cjs: ['cjs']
@@ -33,7 +33,7 @@ module.exports = function (grunt) {
                     expand: true
                   }
                 ]
-            }            
+            }
         },
 
         less: {
