@@ -64,14 +64,16 @@ var Lightbox = React.createClass({
         // Custom
         //view: React.PropTypes.element.isRequired,
         // Callbacks
-        close: React.PropTypes.func
+        close: React.PropTypes.func,
+        overlayClick: React.PropTypes.func
     },
 
     // Fill in the blanks of our api
     getDefaultProps: function() {
         return {
             className: '',
-            close: function() {}
+            close: function() {},
+            overlayClick: function() {}
         };
     },
 
@@ -105,7 +107,7 @@ var Lightbox = React.createClass({
                     </div>
                 </div>
 
-                <div className="overlay" onClick={this.close}></div>
+                <div className="overlay" onClick={this.overlayClick}></div>
             </div>
         );
     }
