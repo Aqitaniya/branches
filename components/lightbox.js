@@ -109,7 +109,7 @@ var Lightbox = React.createClass({
                     </div>
                 </div>
 
-                <div className="overlay" onClick={this.overlayClick}></div>
+                <div className="overlay" onClick={this.props.overlayClick}></div>
             </div>
         );
     }
