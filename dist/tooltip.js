@@ -98,7 +98,7 @@ var Mixin = {
 // =======================================================================================================
 // TOOLTIP COMPONENT
 // ======================================================================================================
-var ToolTip = React.createClass({displayName: 'ToolTip',
+var ToolTip = React.createClass({displayName: "ToolTip",
     mixins: [Mixin],
 
     statics: {
