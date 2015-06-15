@@ -16,7 +16,7 @@ var selectValidAttributes = [
 /**
  * @class Select
  */
-var Select = React.createClass({displayName: "Select",
+var Select = React.createClass({displayName: 'Select',
     mixins: [SimpleFormShared],
 
     /**

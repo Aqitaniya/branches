@@ -25,7 +25,7 @@ var formValidProps = [
  *
  * @class Form
  */
-var Form = React.createClass({displayName: "Form",
+var Form = React.createClass({displayName: 'Form',
     /**
      * Includes a list of w3 form attributes
      *

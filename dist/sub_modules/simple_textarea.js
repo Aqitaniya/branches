@@ -20,7 +20,7 @@ var textareaValidAttributes = [
 /**
  * @class Textarea
  */
-var Textarea = React.createClass({displayName: "Textarea",
+var Textarea = React.createClass({displayName: 'Textarea',
     mixins: [SimpleFormShared],
 
     /**

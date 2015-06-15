@@ -65,7 +65,7 @@ var Mixin = {
 // =============================================================================
 // ALERT COMPONENT
 // =============================================================================
-var Alert = React.createClass({displayName: "Alert",
+var Alert = React.createClass({displayName: 'Alert',
     mixins: [NoScroll],
 
     statics: {

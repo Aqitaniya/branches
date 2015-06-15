@@ -6,7 +6,7 @@ var _ = require('ramda');
 // =============================================================================
 // NOTIFICATION COMPONENT
 // =============================================================================
-var Notification = React.createClass({displayName: "Notification",
+var Notification = React.createClass({displayName: 'Notification',
     // -------------------------------------------------------------------------
     // Initial State
     // -------------------------------------------------------------------------

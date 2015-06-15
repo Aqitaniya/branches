@@ -73,7 +73,7 @@ var inputValidAttributes = [
  *
  * @class Input 
  */
-var Input = React.createClass({displayName: "Input",
+var Input = React.createClass({displayName: 'Input',
     mixins: [SimpleFormShared],
 
     /**

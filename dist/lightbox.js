@@ -50,7 +50,7 @@ var Mixin = {
 // =============================================================================
 // LIGHTBOX COMPONENT
 // =============================================================================
-var Lightbox = React.createClass({displayName: "Lightbox",
+var Lightbox = React.createClass({displayName: 'Lightbox',
 
     mixins: [NoScroll],
 
