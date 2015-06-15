@@ -31,7 +31,7 @@ var Popover = React.createClass({
     },
 
     _popoverComponent: function() {
-        var className = `${this.props.className} popover`;
+        var className = (this.props.className + " popover");
         return React.createElement("div", {className: className}, this.props.children);
     },
 

@@ -6,7 +6,7 @@ var moment = require('moment');
 var MultiCalendar = require('./multiCalendar');
 var DateInput = require('./date');
 var Popover = require('./popover');
-var { maybe } = require('../helpers/ramdaExtras');
+var $__0=    require('../helpers/ramdaExtras'),maybe=$__0.maybe;
 
 var DatePicker = React.createClass({displayName: 'DatePicker',
 
@@ -55,11 +55,11 @@ var DatePicker = React.createClass({displayName: 'DatePicker',
     },
 
     hideCalendar: function() {
-        setTimeout(() => {
+        setTimeout(function()  {
             this.setState({
                 focus: false
             });
-        }, 0);
+        }.bind(this), 0);
     },
 
     onChange: function(selected) {
@@ -84,13 +84,13 @@ var DatePicker = React.createClass({displayName: 'DatePicker',
             return;
         }
 
-        setTimeout(() => {
+        setTimeout(function()  {
             this.props.onChange(selected);
             this.setState({
                 selected: selected,
                 value: value
             });
-        }, 0);
+        }.bind(this), 0);
     },
 
     clearValue: function() {
@@ -104,21 +104,21 @@ var DatePicker = React.createClass({displayName: 'DatePicker',
     },
 
     onMouseEnter: function(day) {
-        setTimeout(() => {
+        setTimeout(function()  {
             this.setState({
                 selected: day,
                 value: day.format('MMDDYYYY')
             });
-        }, 0);
+        }.bind(this), 0);
     },
 
     render: function() {
-        var className = `
-            ${this.props.className}
-            ${this.props.errors.length ? 'error' : ''}
-            ${this.props.disabled ? 'disabled' : ''}
-            datepicker-container
-        `;
+        var className = ("\n            " + 
+this.props.className + "\n            " + 
+(this.props.errors.length ? 'error' : '') + "\n            " + 
+(this.props.disabled ? 'disabled' : '') + "\n            datepicker-container\n        "
+
+);
 
         var clear;
         if (this.state.selected && !this.props.disabled) {

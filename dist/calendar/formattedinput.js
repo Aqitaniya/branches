@@ -75,7 +75,7 @@ var Input = React.createClass({displayName: 'Input',
     },
 
     render: function() {
-        var className = `input-container ${this.props.className} ${this.props.errors.length ? 'error' : ''}`;
+        var className = ("input-container " + this.props.className + " " + (this.props.errors.length ? 'error' : ''));
 
         var clear;
         if (this.props.clearable && this.state.value && !this.props.disabled && this.props.type === 'text') {

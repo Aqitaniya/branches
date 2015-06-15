@@ -34,25 +34,25 @@ function getMonthForYear(targetMonth, targetYear) {
     return month;
 }
 
-class Calendar extends React.Component {
+var ____Class0=React.Component;for(var ____Class0____Key in ____Class0){if(____Class0.hasOwnProperty(____Class0____Key)){Calendar[____Class0____Key]=____Class0[____Class0____Key];}}var ____SuperProtoOf____Class0=____Class0===null?null:____Class0.prototype;Calendar.prototype=Object.create(____SuperProtoOf____Class0);Calendar.prototype.constructor=Calendar;Calendar.__superConstructor__=____Class0;function Calendar(){if(____Class0!==null){____Class0.apply(this,arguments);}}
 
-    renderWeekNames() {
-        return _.map((day) => {
+    Calendar.prototype.renderWeekNames=function() {
+        return _.map(function(day)  {
             return React.createElement("div", {className: "day"}, 
                 moment().weekday(day).format(this.props.dayHeaderFormat)
             );
-        }, _.range(0, 7));
-    }
+        }.bind(this), _.range(0, 7));
+    };
 
-    renderWeeks(weeks) {
-        return _.map(week => React.createElement("div", {className: "week"}, 
+    Calendar.prototype.renderWeeks=function(weeks) {
+        return _.map(function(week)  {return React.createElement("div", {className: "week"}, 
             this.renderDays(week)
-        ), weeks);
-    }
+        );}.bind(this), weeks);
+    };
 
-    renderDays(days) {
-        return _.map((day) => {
-            var markers = _.filter(marker => moment(marker.day).isSame(day, 'day'), this.props.markers);
+    Calendar.prototype.renderDays=function(days) {
+        return _.map(function(day)  {
+            var markers = _.filter(function(marker)  {return moment(marker.day).isSame(day, 'day');}, this.props.markers);
 
             // Boil down all the markers' classNames into one string
             var className = _.compose(
@@ -85,11 +85,11 @@ class Calendar extends React.Component {
                         onDayMouseEnter: this.props.onDayMouseEnter, 
                         onDayMouseLeave: this.props.onDayMouseLeave, 
                         renderToolTip: this.props.renderToolTip});
-        }, days);
-    }
+        }.bind(this), days);
+    };
 
-    render() {
-        var className = `${this.props.className} calendar`;
+    Calendar.prototype.render=function() {
+        var className = (this.props.className + " calendar");
         var month = getMonthForYear(this.props.month, this.props.year);
         var weeks = $.chunk(7, month);
 
@@ -111,10 +111,10 @@ class Calendar extends React.Component {
                 this.renderWeeks(weeks)
             )
         );
-    }
+    };
 
 
-}
+
 
 // Give our component some default properties so we can
 // avoid doing null checks

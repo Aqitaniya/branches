@@ -88,7 +88,10 @@ module.exports = function (grunt) {
                         dest: 'transformed',
                         ext: '.js'
                     }
-                ]
+                ],
+                options: {
+                    harmony: true
+                }
             }
         }
     });

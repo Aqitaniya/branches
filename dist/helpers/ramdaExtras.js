@@ -15,7 +15,7 @@ module.exports = {};
  */
 module.exports.objRemoveEmpty = _.compose(
     _.fromPairs,
-    _.reject(function([key, value]) { return _.isNil(value) || !value.length; }),
+    _.reject(function($__0 ) {var key=$__0[0],value=$__0[1]; return _.isNil(value) || !value.length; }),
     _.toPairs
 );
 
@@ -28,7 +28,7 @@ module.exports.objRemoveEmpty = _.compose(
  */
 module.exports.objRemoveNil = _.compose(
     _.fromPairs,
-    _.reject(function([key, value]) {
+    _.reject(function($__0 ) {var key=$__0[0],value=$__0[1];
         return _.isNil(value) ||
                 (_.is(String, value) && !value.length) ||
                 (_.is(Array, value) && !value.length);
@@ -162,11 +162,11 @@ module.exports.formatPhone = function(val) {
     if (number.length === 0) {
         return '';
     } else if (number.length < 4) {
-        return `(${area}`;
+        return ("(" + area);
     } else if (number.length < 7) {
-        return `(${area}) ${pre}`;
+        return ("(" + area + ") " + pre);
     } else {
-        return `(${area}) ${pre}-${post}`;
+        return ("(" + area + ") " + pre + "-" + post);
     }
 };
 
@@ -266,7 +266,7 @@ module.exports.getExpiryDate = function(expiryString) {
     var year = parseInt(expiryString.substring(2), 10);
     // Since expiry date is only the last 2 digits of year and moment
     // expects 4 digits, make sure to supply moment with the rest
-    return moment().month(month).year(`20${year}`);
+    return moment().month(month).year(("20" + year));
 };
 
 
@@ -324,9 +324,9 @@ module.exports.formatZip = function(val) {
     if (number.length === 0) {
         return '';
     } else if (number.length < 6) {
-        return `${standard}`;
+        return (standard);
     } else {
-        return `${standard}-${extended}`;
+        return (standard + "-" + extended);
     }
 };
 
@@ -392,7 +392,7 @@ module.exports.getActiveServices = function (serviceSummaryDetails) {
     var services = _.compose(
             _.keys,
             _.groupBy(_.prop('serviceType')),
-            _.filter(obj => { return obj.status === 'Active'; }),
+            _.filter(function(obj)  { return obj.status === 'Active'; }),
             _.defaultTo([])
         )(serviceSummaryDetails);
 
