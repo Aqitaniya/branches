@@ -6,7 +6,7 @@ var _ = require('ramda');
 // =============================================================================
 // NOTIFICATION COMPONENT
 // =============================================================================
-var Notification = React.createClass({displayName: 'Notification',
+var Notification = React.createClass({displayName: "Notification",
     // -------------------------------------------------------------------------
     // Initial State
     // -------------------------------------------------------------------------
@@ -17,7 +17,7 @@ var Notification = React.createClass({displayName: 'Notification',
      *
      * @return acknwoledged and dismissed as false.
      */
-    getIntialState: function () {
+    getInitialState: function () {
         return {
             acknowledge: false,
             dismissed: false

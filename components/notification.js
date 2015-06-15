@@ -17,7 +17,7 @@ var Notification = React.createClass({
      *
      * @return acknwoledged and dismissed as false.
      */
-    getIntialState: function () {
+    getInitialState: function () {
         return {
             acknowledge: false,
             dismissed: false

@@ -3,6 +3,7 @@
 // =============================================================================
 var React = require('react');
 var NoScroll = require('./mixins/noscroll');
+var _ = require('ramda');
 
 
 // =============================================================================
@@ -15,12 +16,12 @@ var Mixin = {
         };
     },
 
-    _lightboxOnClose: function(onClose/*, arguments */) {
+    _lightboxOnClose: function(close/*, arguments */) {
         this.setState({_lightbox: false});
 
         var args = [].slice.call(arguments, 1);
-        if (onClose) {
-            onClose.apply(this, args);
+        if (close) {
+            close.apply(this, args);
         }
     },
 
@@ -38,9 +39,9 @@ var Mixin = {
         var lightbox = this.state._lightbox;
 
         if (lightbox) {
-            var onClose = this._lightboxOnClose.bind(this, lightbox.onClose);
+            var close = this._lightboxOnClose.bind(this, lightbox.close);
 
-            return <Lightbox {...lightbox} onClose={onClose} />
+            return <Lightbox {...lightbox} close={close} />
         }
     }
 };
@@ -64,19 +65,28 @@ var Lightbox = React.createClass({
         // Custom
         //view: React.PropTypes.element.isRequired,
         // Callbacks
-        onClose: React.PropTypes.func
+        close: React.PropTypes.func,
+        overlayClick: React.PropTypes.func
     },
 
     // Fill in the blanks of our api
     getDefaultProps: function() {
         return {
             className: '',
-            onClose: function() {}
+            close: function() {},
+            overlayClick: function() {}
         };
     },
 
+    componentWillMount: function() {
+        if (this.props.onClose) {
+            cosnole.warn('Lightbox onClose will be depricated, please use close instead');
+        }
+    },
+
     close: function() {
-        this.props.onClose();
+        var close = this.props.onClose || this.props.close;
+        close();
     },
 
     render: function() {
@@ -89,16 +99,17 @@ var Lightbox = React.createClass({
             containers += this.props.className+'-container';
         }
 
+        var props = _.omit(['className'], this.props);
 
         return (
             <div className={containers}>
                 <div className={classes}>
                     <div className="lightbox-body">
-                        <View ref="view" onClose={this.props.onClose} />
+                        <View ref="view" {...props} onClose={this.close} close={this.close} />
                     </div>
                 </div>
 
-                <div className="overlay" onClick={this.close}></div>
+                <div className="overlay" onClick={this.props.overlayClick}></div>
             </div>
         );
     }
