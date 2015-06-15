@@ -4,6 +4,7 @@ module.exports = {
     Lightbox: require('./lightbox'),
     Notifcation: require('./notification'),
     SimpleForm: require('./simple_form'),
+    Datepicker: require('./datepicker'),
 
     // Mixins
     NoScroll: require('./mixins/noscroll')
