@@ -1,4 +1,8 @@
-branches
+# DEPRECATED
+
+Please use [compwnents](https://github.com/willowtreeapps/compwnents).
+
+# branches
 
 React components, because branches are sort of like components... but for trees
 
